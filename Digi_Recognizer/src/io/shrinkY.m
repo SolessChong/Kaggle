@@ -10,4 +10,4 @@ function Y = shrinkY(Yexp)
 % [1;3;2;5] 
 %
 
-Y = max(Yexp~=0, [], 2);
+[~, Y] = max(Yexp~=0, [], 2);

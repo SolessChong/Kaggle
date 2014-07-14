@@ -5,19 +5,25 @@ Yexp = expandY(Y);
 nTrial = 5;
 error_array = zeros(nTrial,1);
 
-for k = 1 : nTrial
+parfor k = 1 : nTrial
     CVO = cvpartition(Y,'holdout',1/3);
     err = zeros(CVO.NumTestSets,1);
     for i = 1 : CVO.NumTestSets
         trInd = CVO.training(i);
         teInd = CVO.test(i);
 
-        labels = predict_SAE(X(trInd,:), Yexp(trInd,:), X(teInd,:));
-        Yshr = shrinkY(Yexp);
-        err(i,1) = sum(Yshr(teInd) ~= labels);
+        [labels, nn] = predict_SAE(X(trInd,:), Yexp(trInd,:), X(teInd,:));
+
+        err(i,1) = sum(Y(teInd) ~= labels);
     end
     
-    error_array(k) = sum(err)/CVO.TestSize;
+    error_array(k) = 1 - sum(err)/CVO.TestSize;
     
     disp(error_array(k));
 end
+
+disp(error_array);
+
+%labels = predict_SAE(X, Yexp, test);
+
+%genSubmission(labels, 'SAE');
