@@ -2,7 +2,7 @@
 %[X, Y, test] = loadData();
 Yexp = expandY(Y);
 
-nTrial = 5;
+nTrial = 12;
 error_array = zeros(nTrial,1);
 
 parfor k = 1 : nTrial
