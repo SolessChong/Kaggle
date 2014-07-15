@@ -1,4 +1,5 @@
 %% 3rd
+% relative path
 addpath(genpath('D:\Workspace\Lab\3rd\DeepLearning'));
 
 %% project path
