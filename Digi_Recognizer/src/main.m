@@ -5,14 +5,15 @@ Yexp = expandY(Y);
 nTrial = 5;
 error_array = zeros(nTrial,1);
 
-parfor k = 1 : nTrial
+for k = 1 : nTrial
     CVO = cvpartition(Y,'holdout',1/3);
     err = zeros(CVO.NumTestSets,1);
     for i = 1 : CVO.NumTestSets
         trInd = CVO.training(i);
         teInd = CVO.test(i);
 
-        [labels, nn] = predict_SAE(X(trInd,:), Yexp(trInd,:), X(teInd,:));
+        %[labels, nn] = predict_SAE(X(trInd,:), Yexp(trInd,:), X(teInd,:));
+        [labels, cnn] = predict_CNN(X(trInd,:), Yexp(trInd,:), X(teInd,:));
 
         err(i,1) = sum(Y(teInd) ~= labels);
     end
