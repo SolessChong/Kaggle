@@ -27,7 +27,10 @@ opts.batchsize = 50;
 opts.numepochs = 1;
 cnn = cnntrain(cnn, train_x, train_y, opts);
 
-labels = nnpredict(cnn, test) - 1;
+net = cnnff(cnn, x);
+[~, labels] = max(net.o);
+
+labels = labels - 1;
 
 % plot MSE
 figure; plot(cnn.rL);

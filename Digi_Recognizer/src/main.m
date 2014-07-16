@@ -13,7 +13,7 @@ for k = 1 : nTrial
         teInd = CVO.test(i);
 
         %[labels, nn{k}, sae{k}] = predict_SAE(X(trInd,:), Yexp(trInd,:), X(teInd,:));
-        [labels, cnn] = predict_CNN(X(trInd,:), Yexp(trInd,:), X(teInd,:));
+        [labels, cnn{k}] = predict_CNN(X(trInd,:), Yexp(trInd,:), X(teInd,:));
 
         err(i,1) = sum(Y(teInd) ~= labels);
     end
