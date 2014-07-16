@@ -2,7 +2,7 @@
 %[X, Y, test] = loadData();
 Yexp = expandY(Y);
 
-nTrial = 5;
+nTrial = 12;
 error_array = zeros(nTrial,1);
 
 for k = 1 : nTrial
@@ -12,7 +12,7 @@ for k = 1 : nTrial
         trInd = CVO.training(i);
         teInd = CVO.test(i);
 
-        %[labels, nn] = predict_SAE(X(trInd,:), Yexp(trInd,:), X(teInd,:));
+        %[labels, nn{k}, sae{k}] = predict_SAE(X(trInd,:), Yexp(trInd,:), X(teInd,:));
         [labels, cnn] = predict_CNN(X(trInd,:), Yexp(trInd,:), X(teInd,:));
 
         err(i,1) = sum(Y(teInd) ~= labels);
@@ -20,10 +20,10 @@ for k = 1 : nTrial
     
     error_array(k) = 1 - sum(err)/CVO.TestSize;
     
-    disp(error_array(k));
 end
 
 disp(error_array);
+disp(mean(error_array));
 
 %labels = predict_SAE(X, Yexp, test);
 
