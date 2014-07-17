@@ -6,8 +6,8 @@ function [labels, cnn] = predict_CNN_CIFAR(X, Y, test)
 %
 global config
 
-train_x = double(reshape(X', 32, 32, size(X,1))) / 255;
-test_x = double(reshape(test', 32, 32, size(test,1))) / 255;
+train_x = double(reshape(X', 32, 32*3, size(X,1))) / 255;
+test_x = double(reshape(test', 32, 32*3, size(test,1))) / 255;
 train_y = double(Y');
 
 %% Train a 6c-2s-12c-2s Convolutional neural network 
@@ -24,7 +24,7 @@ cnn = cnnsetup(cnn, train_x, train_y);
 
 opts.alpha = 1;
 opts.batchsize = 50;
-opts.numepochs = 200;
+opts.numepochs = 50;
 cnn = cnntrain(cnn, train_x, train_y, opts);
 
 labels = cnnpredict(cnn, test_x)' - 1;
