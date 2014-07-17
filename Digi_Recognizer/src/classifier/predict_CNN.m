@@ -24,14 +24,20 @@ cnn = cnnsetup(cnn, train_x, train_y);
 
 opts.alpha = 1;
 opts.batchsize = 50;
-opts.numepochs = 1;
+opts.numepochs = 200;
 cnn = cnntrain(cnn, train_x, train_y, opts);
 
-net = cnnff(cnn, test_x);
-[~, labels] = max(net.o);
-
-labels = labels' - 1;
+labels = cnnpredict(cnn, test_x)' - 1;
 
 % plot MSE
 figure; plot(cnn.rL);
 
+end
+
+
+function [labels, net] = cnnpredict(cnn, X)
+
+net = cnnff(cnn, X);
+[~, labels] = max(net.o);
+
+end

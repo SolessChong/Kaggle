@@ -1,2 +1,5 @@
 *.csv
 .*
+Digi_Recognizer/cache/
+*.asv
+Digi_Recognizer/src/SCRATCCH.m

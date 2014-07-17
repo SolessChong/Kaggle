@@ -5,7 +5,7 @@ Yexp = expandY(Y);
 nTrial = 12;
 error_array = zeros(nTrial,1);
 
-for k = 1 : nTrial
+parfor k = 1 : nTrial
     CVO = cvpartition(Y,'holdout',1/3);
     err = zeros(CVO.NumTestSets,1);
     for i = 1 : CVO.NumTestSets
